@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>zfs_shop</title>
+<!-- <meta http-equiv="refresh" content="20"> -->
+	<script src = "/static/js/echarts.js"></script>
+	<script src = "/static/js/infographic.js"></script>
+	<script src = "/static/js/echarts-gl.js"></script>
+	<script src = "/static/js/echarts-tree.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	<script src="https://code.highcharts.com/modules/export-data.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/css/show_zfs.css"/>
+</head>
+<body>
+	<div  class="top">
+		<a id="a1" href="/login">退出</a>
+		<div class="top1">
+			<img id="img1" src="/static/images/dog1.png" alt="出错了呦！"/>
+			<form id="form1" action="/usInfo" method="POST">
+				<span id="span1"><i>{{username}}</i></span></br></br>
+				<label for="tex" style="color:#828282;">签名:</label>
+				<input type="text" name="tex"value="{{signature}}" style="border:0px;color: #8B008B;font-size: 14px;" />
+				<input type="text" name="hidEmail" value="{{emailU}}" hidden="hidden"/>
+				<!-- <input type="text" name="texT" value="{{signature}}" hidden="hidden"/> -->
+				<!-- <input type="text" name="username" value="{{username}}"> -->
+				<button type="submit"style="font-size: 17px;background-color: 	#BFEFFF;">修改</button>
+			</form>
+		</div>
+	</div>
+	<!-- background-color:#F5FFFA; -->
+
+	<div class="bard">
+		<iframe class="ifrm1" src="/bar" height="500px">
+		</iframe>
+	</div>
+
+	<div class="right" style="">
+		<iframe class="ifrm2"src="/cpu"name="ifram"width="800px"height="500px">
+		</iframe>
+	</div>
+	<div class="bottom"></div>
+</body>
+</html>

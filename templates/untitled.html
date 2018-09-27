@@ -1,0 +1,58 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src = "../static/js/echarts.js"></script><!--
+<script src = "../static/js/infographic.js"></script>
+<script src = "../static/js/echarts-gl.js"></script>
+<script src = "../static/js/echarts-tree.js"></script> -->
+<div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+<script type="text/javascript">
+    a=0;
+    b=0;
+
+function f( ){
+    a=123.887;
+    b=134.55;
+}
+f();
+Highcharts.chart('container', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Browser market shares in January, 2018'
+  },
+  tooltip: {
+    // pointFormat: '{series.name}: <b>{point.percentage:.1f}</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        // format: '<b>{point.name}</b>: {point.percentage:.1f}',
+        style: {
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
+      }
+    }
+  },
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+    data: [{
+      name: 'netRecvData',
+      y: a,
+    }, {
+      name: 'netSenData',
+      y: b,
+    }]
+  }]
+});
+</script>

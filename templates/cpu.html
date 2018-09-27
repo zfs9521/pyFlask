@@ -1,0 +1,96 @@
+<script src = "/static/js/echarts.js"></script>
+<script src = "/static/js/infographic.js"></script>
+<script src = "/static/js/echarts-gl.js"></script>
+<script src = "/static/js/echarts-tree.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<style type="text/css">
+    #cpu{
+        width: 700px;
+        height:400px;
+        border: 1px solid red;
+        float: left;
+        margin-top: 40px;
+        margin-left: 30px;
+    }
+</style>
+<div id="cpu"></div>
+
+<script type="text/javascript">
+
+    var chart1=Highcharts.chart('cpu', {
+        chart: {
+            type: 'spline',
+            animation: Highcharts.svg, // don't animate in old IE
+            marginRight: 10,
+            events: {
+                load: function () {
+
+                    // set up the updating of the chart each second
+                    var series = this.series[0];
+                    function getForm(){  
+                        jQuery.getJSON('/data', null, function(data) {  
+                           var x = (new Date()).getTime(),
+                                 y=data.cpu[1];//;
+                            series.addPoint([x,y],true,true);  
+                        });  
+                    }  
+                    $(document).ready(function() {  
+                        window.setInterval(getForm,2000);  
+                    });  
+                }
+            }
+        },
+
+        time: {
+            useUTC: false
+        },
+
+        title: {
+            text: 'CPU INFO'
+        },
+        xAxis: {
+            type: 'datetime',
+            tickPixelInterval: 150
+        },
+        yAxis: {
+            title: {
+                text: 'Value'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            headerFormat: '<b>{series.name}</b><br/>',
+            pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+        },
+        legend: {
+            enabled: false
+        },
+        exporting: {
+            enabled: false
+        },
+        series: [{
+            name: 'INIT INFO',
+            data: (function () {
+                // generate an array of random data
+                var data = [],
+                    time = (new Date()).getTime(),
+                    i;
+
+                for (i = 19; i >=6; i -= 1) {
+                    data.push({
+                        x: time - i * 1000,
+                        y: 0
+                    });
+                }
+                return data;
+            }())
+        }]
+    });
+</script>

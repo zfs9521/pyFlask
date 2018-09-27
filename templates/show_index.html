@@ -1,0 +1,386 @@
+<html>
+    <head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<!-- <meta http-equiv="refresh" content="20"> -->
+<script src = "/static/js/echarts.js"></script>
+<script src = "/static/js/infographic.js"></script>
+<script src = "/static/js/echarts-gl.js"></script>
+<script src = "/static/js/echarts-tree.js"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+<!-- <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div> -->
+
+<title>info</title>
+</head>
+
+ <body>
+
+ <div id="cpu" style="width: 700px;height:400px;border: 1px solid red;float: left;"></div>
+ <div id="mem" style="width: 600px;height:400px;float: left;border: 1px solid blue;"></div>
+ <div id="users" style="width: 700px;height:600px;float:left;border: 1px solid orange;"></div>
+ <div id="net" style="width: 600px;height:600px;float: left;border: 1px solid purple;"></div>
+ <div id="parti" style="width: 600px;height:600px;float: left;border: 1px solid green;"></div>
+ <button id="large">Large</button>
+<button id="small">Small</button>
+
+
+<script type="text/javascript">
+
+var chart1=Highcharts.chart('cpu', {
+    chart: {
+        type: 'spline',
+        animation: Highcharts.svg, // don't animate in old IE
+        marginRight: 10,
+        events: {
+            load: function () {
+
+
+                // set up the updating of the chart each second
+                var series = this.series[0];
+                    function getForm(){  
+                        jQuery.getJSON('/data', null, function(data) {  
+                           var x = (new Date()).getTime(),
+                                 y=data.cpu[1];//;
+                            series.addPoint([x,y],true,true);  
+                        });  
+                    }  
+                    $(document).ready(function() {  
+                        f2();
+                        f4();
+                        window.setInterval(getForm,3000);  
+                    });  
+            }
+        }
+    },
+
+    time: {
+        useUTC: false
+    },
+
+    title: {
+        text: 'Live random data'
+    },
+    xAxis: {
+        type: 'datetime',
+        tickPixelInterval: 150
+    },
+    yAxis: {
+        title: {
+            text: 'Value'
+        },
+        plotLines: [{
+            value: 0,
+            width: 1,
+            color: '#808080'
+        }]
+    },
+    tooltip: {
+        headerFormat: '<b>{series.name}</b><br/>',
+        pointFormat: '{point.x:%Y-%m-%d %H:%M:%S}<br/>{point.y:.2f}'
+    },
+    legend: {
+        enabled: false
+    },
+    exporting: {
+        enabled: false
+    },
+    series: [{
+        name: 'Random data',
+        data: (function () {
+            // generate an array of random data
+            var data = [],
+                time = (new Date()).getTime(),
+                i;
+
+            for (i = 19; i >=6; i -= 1) {
+                data.push({
+                    x: time - i * 1000,
+                    y: 0
+                });
+            }
+            return data;
+        }())
+    }]
+});
+</script>
+
+<script type="text/javascript">
+    function f2(){
+        var option = {
+            title:{
+                text:'Memory Info'
+            },
+            tooltip:{},
+            legend:{
+                data:['from beijng']
+            },
+            xAxis:{
+                data:["memoryTotal","memoryUsed","memoryFree","memoryPer"]
+            },
+            yAxis:{
+
+            },
+            series:[{
+                name:'total',
+                type:'bar',
+                data:[{{mem[0]}},{{mem[1]}},{{mem[2]}},{{mem[3]}}]
+            }]
+        };
+
+        var myChart = echarts.init(document.getElementById('mem'));
+
+
+        myChart.setOption(option);
+    }
+    </script>
+<script type="text/javascript">
+Highcharts.chart('net', {
+  chart: {
+    plotBackgroundColor: null,
+    plotBorderWidth: null,
+    plotShadow: false,
+    type: 'pie'
+  },
+  title: {
+    text: 'Browser market shares in January, 2018'
+  },
+  tooltip: {
+    // pointFormat: '{series.name}: <b>{point.percentage:.1f}</b>'
+  },
+  plotOptions: {
+    pie: {
+      allowPointSelect: true,
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: true,
+        // format: '<b>{point.name}</b>: {point.percentage:.1f}',
+        style: {
+          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+        }
+      }
+    }
+  },
+  series: [{
+    name: 'Brands',
+    colorByPoint: true,
+    data: [{
+      name: 'netRecvData',
+      y: {{net[0]}},
+    }, {
+      name: 'netSenData',
+      y: {{net[1]}},
+    }]
+  }]
+});
+</script>
+<script type="text/javascript">
+    function f4(){
+        var data2 = {
+                "name": "users",
+                "children": [
+                    {
+                        "name": "userCount", "value": {{ users[0] }}
+                    }
+                    ,
+                    {
+                        "name": "userName",
+                        "children": [
+                                {% for name in users[1] %}
+                                {"name":"{{name}}"},
+                                {% endfor %}
+                        ]
+                    }
+                ]
+            };
+        var option = {
+            tooltip: {
+                trigger: 'item',
+                triggerOn: 'mousemove'
+            },
+            legend: {
+                top: '2%',
+                left: '3%',
+                orient: 'vertical',
+                data: [{
+                    name: 'tree1',
+                    icon: 'rectangle'
+                } ,
+                {
+                    name: 'UserInfo',
+                    icon: 'rectangle'
+                }],
+                borderColor: '#c23531'
+            },
+            series:[
+                {
+                    type: 'tree',
+                    name: 'UserInfo',
+                    data: [data2],
+
+                    top: '20%',
+                    left: '60%',
+                    bottom: '22%',
+                    right: '18%',
+
+                    symbolSize: 7,
+
+                    label: {
+                        normal: {
+                            position: 'left',
+                            verticalAlign: 'middle',
+                            align: 'right'
+                        }
+                    },
+
+                    leaves: {
+                        label: {
+                            normal: {
+                                position: 'right',
+                                verticalAlign: 'middle',
+                                align: 'left'
+                            }
+                        }
+                    },
+
+                    expandAndCollapse: true,
+
+                    animationDuration: 550,
+                    animationDurationUpdate: 750
+                }
+            ]
+        }
+        var myChart = echarts.init(document.getElementById('users'));
+        myChart.setOption(option);
+    }
+    </script>
+     <script type="text/javascript">
+
+var chart5 = Highcharts.chart('parti', {
+
+  chart: {
+    type: 'column',
+    events: {
+              load: function() {
+                  // set up the updating of the chart each second
+                  var series = this.series;
+
+                  setInterval(function() {
+                      var datas = [];
+                        jQuery.getJSON('/data', null, function(data) { 
+                             dev1=data.parti[1][0];
+                            dev2=data.parti[1][1];
+                         datas.push(['total', dev1[1]]);
+                        datas.push(['total', dev2[1]]);
+                      series[0].setData(datas);  
+                      datas=[]
+                      datas.push(['used', dev1[2]]);
+                        datas.push(['used', dev2[2]]);
+                      series[1].setData(datas);  
+                      datas=[]
+                      datas.push(['free', dev1[3]]);
+                        datas.push(['free', dev2[3]]);
+                      series[2].setData(datas); 
+ 
+                        });
+                        
+                  }, 3000);
+              }
+          }
+  },
+
+  title: {
+    text: 'Highcharts responsive chart'
+  },
+
+  subtitle: {
+    text: 'Resize the frame or click buttons to change appearance'
+  },
+
+  legend: {
+    align: 'right',
+    verticalAlign: 'middle',
+    layout: 'vertical'
+  },
+
+  xAxis: {
+    categories: ['disk1s1', 'disk1s4'],
+    labels: {
+      x: -10
+    }
+  },
+
+  yAxis: {
+    allowDecimals: false,
+    title: {
+      text: 'Amount'
+    }
+  },
+
+  series: [{
+    name: 'total',
+    data: [1, 2]
+  }, {
+    name: 'used',
+    data: [2, 3]
+  }, {
+    name: 'free',
+    data: [3, 4]
+  }],
+
+  responsive: {
+    rules: [{
+      condition: {
+        maxWidth: 500
+      },
+      chartOptions: {
+        legend: {
+          align: 'center',
+          verticalAlign: 'bottom',
+          layout: 'horizontal'
+        },
+        yAxis: {
+          labels: {
+            align: 'left',
+            x: 0,
+            y: -5
+          },
+          title: {
+            text: null
+          }
+        },
+        subtitle: {
+          text: null
+        },
+        credits: {
+          enabled: false
+        }
+      }
+    }]
+  }
+});
+
+$('#small').click(function () {
+  chart5.setSize(400, 300);
+});
+
+$('#large').click(function () {
+  chart5.setSize(600, 300);
+});
+    </script>
+    <script type="text/javascript">
+
+        // setInterval(f1,5000);
+        // setInterval(f2,5000);
+        // setInterval(f3,20000);
+        // setInterval(f4,5000);
+        // setInterval(f5,20000);
+    </script>
+    <script type="text/javascript">
+
+        
+</script>
+</body>
+</html>

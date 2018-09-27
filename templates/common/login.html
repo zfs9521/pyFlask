@@ -1,0 +1,209 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login page |TECH</title>
+
+
+	<!--STYLESHEET-->
+	<!--=================================================-->
+
+
+
+	<!--Bootstrap Stylesheet [ REQUIRED ]-->
+	<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+
+
+	<!--Nifty Stylesheet [ REQUIRED ]-->
+	<link href="/static/css/nifty.min.css" rel="stylesheet">
+
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="/static/plugins/bootstrap-validator/bootstrapValidator.min.css" rel="stylesheet">
+	<style type="text/css">
+		body{
+			background-color: #E0FFFF;
+			text-align: center;
+		}
+		#container2{
+			background-color: 	#FFFFE0;
+			border: 1px solid #00FFFF;
+			width: 600px;
+			height: 400px;
+			float: left;
+			margin-left:300px;
+			margin-top:150px;
+
+		}
+		.input-group-addon i{
+			color:#FF1493;
+		}
+	</style>
+
+</head>
+
+<!--TIPS-->
+<!--You may remove all ID or Class names which contain "demo-", they are only used for demonstration. -->
+
+<body>
+	<div id="container" class="cls-container">
+		<div id="container2" class="cls-container2">
+		<!-- BACKGROUND IMAGE -->
+		<!--===================================================-->
+		<div id="bg-overlay" ></div>
+
+
+		<!-- HEADER -->
+		<!--===================================================-->
+		<div class="cls-header cls-header-lg">
+			<div class="cls-brand">
+				<!--a class="box-inline" href="index.html">
+                    <img src="/static/img/eye_logo.png" alt="Nifty Logo"  >
+                    MadKing
+
+
+				</a-->
+                <h3>zfs</h3>
+                <h4>系统</h4>
+			</div>
+		</div>
+		<!--===================================================-->
+
+
+		<!-- LOGIN FORM -->
+		<!--===================================================-->
+		<div class="cls-content">
+			<div class="cls-content-sm panel">
+				<div class="panel-body">
+					<p class="pad-btm">{{mess}}</p>
+
+					<form id="loginForm" action="#" method="POST">
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-user">邮箱</i></div>
+								<input type="text" class="form-control" name="email" placeholder="Email">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="input-group">
+								<div class="input-group-addon"><i class="fa fa-asterisk">密码</i></div>
+								<input type="password" class="form-control" name="password" placeholder="Password">
+							</div>
+						</div>
+						<!--div class="row">
+							<div class="col-xs-8 text-left checkbox">
+								<label class="form-checkbox form-icon">
+								<input type="checkbox"> 记住我
+								</label>
+							</div>
+							<div class="col-xs-8">
+								<div class="form-group text-right">
+								<button class="btn btn-success text-uppercase" type="submit">登录</button>
+								</div>
+							</div>
+						</div>
+						<div class="mar-btm"><em>- or -</em></div-->
+						<button class="btn btn-success  btn-block" type="submit">
+							<b>登录</b>
+						</button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        <h4 style="color: red"><b>{{ login_err }}</b></h4>
+					</form>
+				</div>
+			</div>
+			<div class="pad-ver">
+				<a href="#" class="btn-link mar-rgt">Forgot password ?</a>
+				<a href="/regis" class="btn-link mar-lft">Create a new account</a>
+			</div>
+		</div>
+	</div>
+		<!--===================================================-->
+
+
+
+
+	</div>
+	<!--===================================================-->
+	<!-- END OF CONTAINER -->
+
+
+
+	<!--JAVASCRIPT-->
+	<!--=================================================-->
+
+	<!--jQuery [ REQUIRED ]-->
+	<script src="/static/js/jquery-2.1.1.min.js"></script>
+
+
+	<!--BootstrapJS [ RECOMMENDED ]-->
+	<script src="/static/js/bootstrap.min.js"></script>
+
+
+
+    <script src="/static/plugins/bootstrap-validator/bootstrapValidator.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#loginForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            email: {
+                message: 'The username is not valid',
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 2,
+                        max: 30,
+                        message: 'The email must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The email can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            password:{
+                message: "The password is not valid",
+                validators:{
+                    notEmpty:{
+                        'message': "the password is required and cannot be empty"
+                    },
+                    stringLength:{
+                        min:6,
+                        max:30,
+                        message:'The password must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+		              regexp: /^[^ ]+$/,
+		              message: 'password cannot have space！'
+		            }
+                }
+            },
+
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email is required and cannot be empty'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            }
+        }
+    });
+});
+
+</script>
+
+</body>
+</html>

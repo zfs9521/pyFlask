@@ -1,0 +1,286 @@
+<style type="text/css">
+	.top{
+		width:1330px;
+		min-height:80px;
+		text-align:center;
+	}
+	.top2{
+		width:1330px;
+		min-height:30px;
+		/* border:1px solid #DDD; */
+		background-color:#EEE;
+	}
+	.address{
+		list-style:none;
+		float:left;
+		margin-top:4px;
+		margin-left:21%;
+		margin-right:20%;
+		text-decoration:none;
+		font:13px 隶书;
+		color:#777;
+
+	}
+	.top2 ul{
+		height:20px;
+		margin:0px;
+		padding:0px;
+		float:left;
+
+	}
+	.top2 ul li{
+		list-style:none;
+		float:left;
+		margin-right:5px;
+	}
+	.top2 ul li a{
+			text-decoration:none;
+			font:12px 隶书;
+			color:#777;
+	}
+	.top2 ul li a:hover{
+		color:red;
+	}
+
+
+	.left{
+		width:20%;
+		min-height:480px;
+		/* border:1px solid green; */
+		margin:0px;
+		padding:0px;
+		float:left;
+
+
+	}
+	.left ul{
+
+		line-height:27px;
+		margin:0px;
+		padding:0px;
+
+	}
+	.left ul li{
+
+		list-style:none;
+		text-align:center;
+	}
+	.left ul li:hover{
+		background-color:#EEE;
+	}
+	.left ul li a{
+		text-decoration:none;
+		font-family:隶书;
+		font-size:15px;
+		color:#777;
+	}
+	.left ul li a:hover{
+		color:red;
+	}
+	.center{
+		width:60%;
+		min-height:480px;
+		/* border:3px solid red; */
+		margin:0px;
+		padding:0px;
+		float:left;
+
+	}
+	.center ul{
+		margin:5px;
+		padding:0px;
+		width:590px;
+		height:480px;
+		list-style:none;
+		background:url("/static/images/13.jpg") no-repeat;
+		float:left;
+	}
+	.center img{
+		float:left;
+		margin-top:5px;
+		margin-bottom:5px;
+	}
+	.center ul li{
+		width:10px;
+		float:left;
+		/* border:1px solid red; */
+		margin-left:20px;
+		margin-top:430px;
+	}
+	 #l1{
+		color:none;
+	}
+	.top3{
+		width:99.9%;
+		min-height:140px;
+		border:1px solid green;
+		margin:0px;
+		padding:0px;
+		background-color:#EEE;
+	}
+	.top3 #i1{
+		margin:0px;
+		padding:0px;
+		float:left;
+	}
+	.top3 .topText{
+		/* border:1px solid red; */
+		margin-top:21px;
+		margin-left:90px;
+		padding:0px;
+		width:650px;
+		height:32px;
+		float:left;
+
+	}
+	.top3 .imageText{
+		margin-top:20px;
+	}
+	.top3 .center1{
+		margin-top:0px;
+		margin-left:90px;
+		padding:0px;
+		width:650px;
+		height:15px;
+		float:left;
+		list-style:none;
+		text-align:center;
+	}
+	.top3 .center1 li{
+		float:left;
+		font-size:10px;
+		margin-right:20px;
+		color:#AAA;
+	}
+	.top3 .center1 li:hover{
+		color:red;
+	}
+	.top3 .center1 #cl1{
+		float:left;
+		font-size:10px;
+		margin-right:24px;
+		color:red;
+		margin-left:30px;
+	}
+	.top3 .center2{
+		/* border:1px solid yellow; */
+		margin-top:10px;
+		margin-left:40px;
+		padding:0px;
+		float:left;
+		width:875px;
+		height:30px;
+		list-style:none;
+
+	}
+	.top3 .center2 li{
+		margin-right:30px;
+		float:left;
+
+	}
+	.top3 .center2 a{
+		font-size:15px;
+		color:#555;
+		text-decoration:none;
+	}
+	.top3 .center2 a:hover{
+		color:red;
+	}
+	.top3 .center2 #cl2{
+		margin-left:28px;
+		margin-right:20px;
+		float:left;
+	}
+	.top3 .topRight{
+		/* border:1px solid green; */
+		margin-right:0px;
+		margin-top:0px;
+		padding:0px;
+		width:230px;
+		height:140px;
+		float:right;
+	}
+	.top3 .topRight #tRp{
+		width:120px;
+		height:30px;
+		margin-top:25px;
+		margin-left:40px;
+		/* border:1px solid red; */
+		float:left;
+		background-color:white;
+		text-align:center;
+		color:red;
+		font-size:13px;
+	}
+	.top3 .topRight #tRp a{
+		float:right;
+		margin-top:6px;
+		margin-right:20px;
+		margin-left:0px;
+		color:red;
+		text-decoration:none;
+	}
+	.top3 .topRight #tR1{
+		float:right;
+	}
+	.top3 .topRight #tR2{
+		float:right;
+		margin-top:29px;
+
+	}
+	.right{
+		width:19.8%;
+		min-height:480px;
+		border:1px solid #AAA;
+		margin-top:5px;
+		padding:0px;
+		float:left;
+	}
+	.right .rightD1{
+		text-align:center;
+	}
+	#s1 a:hover{
+		color:red;
+	}
+	#s2{
+		background-color:purple;
+	}
+	#s2:hover{
+		background-color:red;
+		color:white;
+	}
+	#s3{
+		background-color:green;
+	}
+	#s3:hover{
+		background-color:red;
+		color:white;
+	}
+	.right .rightD2 .rightUL{
+		list-style:none;
+	}
+	.right .rightD2 .rightUL li a{
+		font-size:14px;
+		color:#777;
+		font-family:隶书;
+		line-height:25px;
+	}
+	.right .rightD2 .rightUL li a:hover{
+		color:red;
+	}
+	#table1{
+		margin-top:10px;
+		margin-left:20px;
+		/* border:1px solid red; */
+		width:230px;
+		min-height:110px;
+
+	}
+	#table1 td a{
+		font-size:13px;
+		color:#777;
+	}
+	#table1 td a:hover{
+		color:red;
+	}
+</style>

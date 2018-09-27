@@ -1,0 +1,73 @@
+<style type="text/css">
+	ul{
+		list-style:none;
+		width: 283px;
+		/*border: 1px solid yellow;*/
+		height: 600px;
+		padding-left: 0px;
+		float: left;
+		margin: 0px;
+		background-color:	#000000;
+	}
+	/*#FF1493*/
+	ul li{
+		border: 1px solid 	#FFE4E1;
+		margin-top: 23px;
+		height: 70px;
+		width: 283px;
+		float: left;
+		margin-left:0px;
+		text-align: center;
+		color: #E8E8E8;
+		font-size: 40px;
+		letter-spacing: 5px;
+		background-color:		#000000;
+	}
+	.liCla{
+		border: 1px solid 	#FFE4E1;
+		margin-top: 23px;
+		height: 70px;
+		width: 283px;
+		float: left;
+		margin-left:0px;
+		text-align: center;
+		color: white;
+		font-size: 40px;
+		letter-spacing: 5px;
+		background-color:		#FF1493;
+	}
+</style>
+
+<ul >
+	<a href="/cpu" target="ifram"><li >cpu</li></a>
+	<a href="/mem" target="ifram"><li>mem</li></a>
+	<a href="/users" target="ifram"><li>users</li></a>
+	<a href="/net" target="ifram"><li>net</li></a>
+	<a href="/parti" target="ifram"><li>parti</li></a>
+	<a href="/process" target="ifram"><li>process</li></a>
+</ul>
+<script src="/static/js/jquery.js"></script>
+<script type="text/javascript">
+	flag=true;
+	var text="haha";
+	$("li").hover(function(){
+		flag=true;
+		$(this).css("background-color","#FF1493");
+		$(this).css("color","white");
+	},function(){
+		if(flag&&text!=$(this).text()){
+			$(this).css("background-color","#000000");
+		}
+	});
+	$("li").click(function(){
+		$("li").css("background-color","#000000");
+		$(this).css("background-color","#FF1493");
+		$(this).css("color","white");
+		text=$(this).text();
+		// alert(text);
+		flag=false;
+	});
+
+
+
+</script>

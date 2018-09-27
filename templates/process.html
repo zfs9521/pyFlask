@@ -1,0 +1,33 @@
+<meta http-equiv="refresh" content="5">
+<style type="text/css">
+	.process{
+		width: 700px;
+		height:400px;
+		border: 1px solid #FFFFE0;
+		float: left;
+		margin-top: 10px;
+		margin-left: 30px;
+		color: #E0FFFF;
+	}
+</style>
+ <table class="process" border="1px">
+                <tr>
+                	<td colspan="2">processCount</td>
+                	<td colspan="2">{{process[0]}}</td>
+                </tr><br>
+                <tr>
+                	<th>pid</th>
+                	<th>pname</th>
+                	<th>pstatus</th>
+                	<th>pcretime</th>
+                </tr>
+
+                {% for proc in process[1] %}
+                    <tr>
+                    	<td>{{proc[0]}}</td>
+                    	<td>{{proc[1]}}</td>
+                    	<td>{{proc[2]}}</td>
+                    	<td>{{proc[3]}}</td>
+                    </tr>
+                {% endfor %}
+ </table>
